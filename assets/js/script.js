@@ -28,7 +28,26 @@ function createTaskCard(task) {
   }
 // Todo: create a function to render the task list and make cards draggable
 function renderTaskList() {
+    $('#todo-cards').html('');
+    $('#in-progress-cards').html('');
+    $('#done-cards').html('');
 
+    taskList.forEach(task => {
+        let taskCard = createTaskCard(task);
+        if (task.status === 'To Do') {
+            $('#todo-cards').append(taskCard);
+        } else if (task.status === 'In Progress') {
+            $('#in-progress-cards').append(taskCard);
+        } else if (task.status === 'Done') {
+            $('#done-cards').append(taskCard);
+        }
+    });
+
+    $('.task-card').draggable({
+        revert: "invalid",
+        helper: "clone",
+        cursor: "move"
+    });
 }
 
 // Todo: create a function to handle adding a new task
